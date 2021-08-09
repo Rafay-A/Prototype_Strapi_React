@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { CurrentUserProvider } from "./components/CurrentUser.js";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <CurrentUserProvider>
     <App />
+    </CurrentUserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
