@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { appConfig } from '../services/config';
 import Container from '@material-ui/core/Container';
+import { CartContext } from '../contexts/CartContext';
+import { useContext } from 'react';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles(() => ({
 const ItemCard = ({ product }) => {
   const classes = useStyles();
   const { photo } = product;
+  const { addToCart } = useContext(CartContext);
 
   return (
     <>
@@ -44,8 +47,9 @@ const ItemCard = ({ product }) => {
           color='primary'
           variant='contained'
           fullWidth
+          onClick={() => addToCart(product)}
         >
-          Description
+          Add to Cart
         </Button>
       </CardActions>
     </Card>

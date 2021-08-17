@@ -1,6 +1,8 @@
 import React from 'react';
 import '../App.css';
 import { useState, useEffect } from 'react';
+import { useCurrentUser } from "../components/CurrentUser";
+import { callApi } from "../services/utils";
 
 const Profile = () => {
 

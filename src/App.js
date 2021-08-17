@@ -7,9 +7,14 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import { useCurrentUser, useDispatchCurrentUser } from "./components/CurrentUser";
+import { useCurrentUser } from "./components/CurrentUser";
+import Footer from './components/Footer';
+import { CartProvider } from './contexts/CartContext';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import Order from './pages/Order';
+
 //import Detail from './components/Detail';
-//import { CartProvider } from './contexts/CartContext';
 
 function PrivateRoute({children, ...rest}){
   let currentUser = useCurrentUser();
@@ -33,9 +38,12 @@ function PrivateRoute({children, ...rest}){
   );
 }
 
+//window.location.reload(false);
+
 const App = () => {
   return (
     <>
+    <CartProvider>
       <Router>
         <CssBaseLine />
           <NavBar />
@@ -47,7 +55,7 @@ const App = () => {
               <div className='product' style={{ 'justifyContent':'center'}}>
                 <hr/>
                 <div style={{ 'textAlign':'center'}}>
-                  <h3 style={{'color':'#2E3B55'}} >Browse Our Products!</h3>
+                  <h2 style={{'color':'#2E3B55'}}>Browse Our Products!</h2>
                 </div>
                 <hr/>
                 <Product />
@@ -56,6 +64,15 @@ const App = () => {
             <Route path='/login'>
               <Login />
             </Route>
+            <PrivateRoute path='/cart'>
+              <Cart />
+            </PrivateRoute>
+            <Route path='/checkout'>
+              <Checkout />
+            </Route>
+            <Route path='/orders/:code'>
+              <Order />
+            </Route>
             {/* <Route path='/detail'>
               <Detail />
             </Route>  */}
@@ -63,8 +80,9 @@ const App = () => {
               <Profile />
             </Route>
           </Switch>
-        
+        <Footer/>
       </Router>
+    </CartProvider>
     </>
   );
 };

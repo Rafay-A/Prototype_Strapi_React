@@ -6,6 +6,12 @@ import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { Link } from 'react-router-dom';
 import { useCurrentUser,useDispatchCurrentUser } from './CurrentUser';
 import { callApi } from '../services/utils';
+import Badge from '@material-ui/core/Badge';
+import { CartContext } from '../contexts/CartContext';
+import React, { useContext } from 'react';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+// import React, { useState, useEffect } from 'react';
+// import { fetchUsers } from '../services/api';
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -22,11 +28,31 @@ const NavBar = () => {
   const classes = useStyles();
   const currentUser = useCurrentUser();
   const dispatch = useDispatchCurrentUser();
+  const { cart } = useContext(CartContext);
   
   const handleLogout = async () => {
     await callApi("/logout", "POST");
     dispatch({ type: "LOGOUT" });
   }
+
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await fetchUsers();
+  //       setUsers(data);
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  // const content = users.map(user => (
+  //   <div key={user.id}>
+  //   <a>{user.username}</a>
+  // </div>
+  // ))
 
   return (
     <>
@@ -38,9 +64,19 @@ const NavBar = () => {
               Products
             </Link>
           </Typography>
-        {/* <Link style={{ 'paddingLeft': '50px' }} to='/profile' className={classes.link}>
+         {/* <Link style={{ 'paddingLeft': '50px' }} to='/profile' className={classes.link}>
             Profile
-        </Link> */}
+        </Link>
+        {currentUser.isAuthenticated && (
+        <Link style={{ 'paddingLeft': '50px' }} to='/profile' className={classes.link}>
+            {content}
+        </Link>
+        )} */}
+        <Link style={{ 'paddingLeft': '50px' }} to='/cart' className={classes.link}>
+          <Badge color='secondary' badgeContent={cart.itemsCount}>
+            <ShoppingCartIcon />
+          </Badge>
+        </Link>
         <Link style={{ 'paddingLeft': '50px' }} to='/' className={classes.link}>
             Home
         </Link>
@@ -50,8 +86,8 @@ const NavBar = () => {
         </Link>
         )}
         {currentUser.isAuthenticated && (
-        <Link style={{ 'paddingLeft': '50px' }} onClick={handleLogout} className={classes.link}>
-            Log out
+        <Link style={{ 'paddingLeft': '50px' }} onClick={handleLogout} to='/login' className={classes.link}>
+          Log out
         </Link>
         )}
       </Toolbar>

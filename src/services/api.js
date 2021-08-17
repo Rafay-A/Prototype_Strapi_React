@@ -14,21 +14,21 @@ export const fetchProducts = async (query = '') => {
 };
 
 // export const fetchUsers = async (query = '') => {
-//   const { data } = await createAxios().get(`/users?${query}`);
+//   const { data } = await createAxios().get(`/users/me?${query}`);
 //   return data;
 // };
 
-// export const createOrder = async order => {
-//   const { data } = await createAxios().post('/orders', order);
-//   return data;
-// };
+export const createOrder = async order => {
+  const { data } = await createAxios().post('/orders', order);
+  return data;
+};
 
-// export const getOrder = async orderCode => {
-//   const { data } = await createAxios().get(`/orders/${orderCode}`);
-//   return data;
-// };
+export const getOrder = async orderCode => {
+  const { data } = await createAxios().get(`/orders/${orderCode}`);
+  return data;
+};
 
-// export const patchOrder = async orderCode => {
-//   const { data } = await createAxios().patch(`/orders/${orderCode}`);
-//   return data;
-// };
+export const patchOrder = async orderCode => {
+  const { data } = await createAxios().patch(`/orders/${orderCode}`);
+  return data;
+};

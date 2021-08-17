@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useCurrentUser, useDispatchCurrentUser } from "../components/CurrentUser";
-//import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,10 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {callApi} from '../services/utils';
-import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
+    <>
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
@@ -25,6 +25,7 @@ function Copyright() {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
+    </>
   );
 }
 
